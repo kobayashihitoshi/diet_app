@@ -1,0 +1,46 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="bg-white shadow-lg rounded-2xl p-8 w-full max-w-sm">
+    <h2 class="text-2xl font-bold text-center text-blue-600 mb-6">ユーザー登録</h2>
+
+    <%= form_with model: @user, url: users_path, local: true do |f| %>
+      <% fields = [
+        [:name, "氏名"],
+        [:email, "メールアドレス"],
+        [:password, "パスワード"],
+        [:password_confirmation, "パスワード確認用"],
+        [:age, "年齢"],
+        [:current_weight, "現在の体重 (kg)", :number_field],
+        [:target_weight, "目標体重 (kg)", :number_field]
+      ] %>
+
+      <% fields.each do |field| %>
+        <div class="mb-4 flex flex-col items-center">
+          <%= f.label field[0], field[1], class: "block text-sm font-medium text-gray-700 mb-1" %>
+          <%= f.send(field[2] || :text_field, field[0], 
+              class: "w-4/5 border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500",
+              step: field[0].to_s.include?("weight") ? 0.1 : nil
+            ) %>
+        </div>
+      <% end %>
+
+      <div class="mb-6 flex flex-col items-center">
+        <%= f.label :gender, "性別", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.select :gender, ['男性', '女性', 'その他'],
+            class: "w-4/5 border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+      </div>
+
+      <%= f.submit "登録", class: "w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md" %>
+    <% end %>
+
+    <% if @user.errors.any? %>
+      <div class="mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+        <h3 class="font-bold mb-2">エラーがあります：</h3>
+        <ul class="list-disc list-inside text-sm">
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+</div>

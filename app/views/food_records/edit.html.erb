@@ -1,0 +1,27 @@
+<h2>食事記録の更新</h2>
+
+<%= form_with model: @food_record do |f| %>
+  <div>
+    <%= f.label :recorded_on, '日付' %><br>
+    <%= f.date_field :recorded_on, value: Date.today %>
+  </div>
+
+  <div>
+    <%= f.label :meal_type, '食事の種類' %><br>
+    <%= f.select :meal_type, FoodRecord: :MEAL_TYPES %>
+  </div>
+
+  <div>
+    <%= f.label :menu, 'メニュー' %><br>
+    <%= f.text_field :menu %>
+  </div>
+
+  <div>
+    <%= f.label :calories, 'カロリー（kcal）' %><br>
+    <%= f.number_field :calories %>
+  </div>
+
+  <%= f.submit '更新する' %>
+<% end %>
+
+<%= link_to "一覧に戻る", food_records_path %>

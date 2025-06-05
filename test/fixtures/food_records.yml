@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  recorded_on: 2025-05-31
+  meal_type: MyString
+  menu: MyString
+  calories: 1
+
+two:
+  user: two
+  recorded_on: 2025-05-31
+  meal_type: MyString
+  menu: MyString
+  calories: 1

@@ -1,0 +1,53 @@
+<div class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+
+  <!-- ユーザー情報 -->
+  <div class="bg-white rounded-2xl shadow p-6">
+    <h2 class="text-3xl font-bold mb-4 flex items-center gap-2">
+      <i class="fas fa-user text-blue-500"></i> マイページ
+    </h2>
+    <p class="text-gray-700 text-base md:text-lg mb-4">
+      ようこそ、<span class="font-semibold text-blue-600"><%= @user.name %></span> さん！
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-600">
+      <div>🗓️ 年齢：<%= @user.age %> 歳</div>
+      <div>🚻 性別：<%= @user.gender %></div>
+      <div>⚖️ 現在の体重：<%= @user.current_weight %> kg</div>
+      <div>🎯 目標の体重：<%= @user.target_weight %> kg</div>
+    </div>
+  </div>
+
+  <!-- ダッシュボード -->
+  <div class="bg-white rounded-2xl shadow p-6">
+    <h3 class="text-2xl font-semibold mb-4 flex items-center gap-2">
+      <i class="fas fa-chart-line text-green-500"></i> ダッシュボード
+    </h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <%= link_to "📈 グラフで見る（体重推移）", graphs_path,
+        class: "block bg-blue-50 hover:bg-blue-100 text-blue-700 p-4 rounded-lg shadow text-center font-semibold" %>
+      <%= link_to "📅 １日ごとの記録を見る", daily_dashboard_path,
+        class: "block bg-blue-50 hover:bg-blue-100 text-blue-700 p-4 rounded-lg shadow text-center font-semibold" %>
+    </div>
+  </div>
+
+  <!-- 今日の記録 -->
+  <div class="bg-white rounded-2xl shadow p-6">
+    <h3 class="text-2xl font-semibold mb-4 flex items-center gap-2">
+      <i class="fas fa-calendar-day text-purple-500"></i> 今日の記録
+    </h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <%= link_to "⚖️ 体重を記録する", new_weight_record_path,
+        class: "block bg-purple-50 hover:bg-purple-100 text-purple-700 p-4 rounded-lg shadow text-center font-medium" %>
+      <%= link_to "📊 体重の記録一覧", weight_records_path,
+        class: "block bg-purple-50 hover:bg-purple-100 text-purple-700 p-4 rounded-lg shadow text-center font-medium" %>
+      <%= link_to "🍽️ 食事を記録する", new_food_record_path,
+        class: "block bg-green-50 hover:bg-green-100 text-green-700 p-4 rounded-lg shadow text-center font-medium" %>
+      <%= link_to "📋 食事の記録一覧", food_records_path,
+        class: "block bg-green-50 hover:bg-green-100 text-green-700 p-4 rounded-lg shadow text-center font-medium" %>
+      <%= link_to "🏃‍♂️ 運動を記録する", new_exercise_record_path,
+        class: "block bg-yellow-50 hover:bg-yellow-100 text-yellow-700 p-4 rounded-lg shadow text-center font-medium" %>
+      <%= link_to "📚 運動の記録一覧", exercise_records_path,
+        class: "block bg-yellow-50 hover:bg-yellow-100 text-yellow-700 p-4 rounded-lg shadow text-center font-medium" %>
+    </div>
+
+  </div>
+</div>

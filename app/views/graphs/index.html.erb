@@ -1,0 +1,28 @@
+<h2>体重の推移</h2>
+
+<canvas id='weightChart '></canvas>
+
+<script>
+  const ctx = document.getElementById('weightChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: <%= raw @dates.to_json %>
+      datasets: [{
+        label: '体重（kg）'
+        data: <%= raw @weights.to_json %>
+        borderColor: 'rgba(75, 192, 192, 1)',
+        fill: false,
+        tension: 0.2
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: false
+        }
+      }
+    }
+  });
+</script>

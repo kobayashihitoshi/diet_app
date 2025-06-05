@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Diet App" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes"> <%# Deprecatedのapple-mobile-web-app-capableをmobile-web-app-capableに更新 %>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#4CAF50">
+
+    <link rel="apple-touch-icon" href="/icon.png">
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+
+    <%= yield :head %>
+  </head>
+
+  <body class="bg-gray-100 min-h-screen flex flex-col font-sans">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+      <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold text-blue-600">
+          <%= link_to 'DIT', root_path, class: 'hover:underline' %>
+        </h1>
+
+
+        <!-- ハンバーガーメニュー -->
+        <button class="sm:hidden text-gray-700 focus:outline-none" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+
+        <!-- 通常ナビゲーション -->
+        <nav class="hidden sm:flex space-x-4 text-gray-700" id="menu">
+          <% if logged_in? %>
+            <%= link_to 'マイページ', dashboard_path, class: "hover:text-blue-600" %>
+            <%= link_to 'ログアウト', logout_path, method: :delete, data: { confirm: "ログアウトしますか？" }, class: "text-red-500 hover:text-red-700" %>
+            <span class="text-sm text-gray-500"><%= current_user.name %> さん</span>
+          <% else %>
+            <%= link_to 'ログイン', login_path, class: "hover:text-blue-600" %>
+            <%= link_to 'ユーザー登録', signup_path, class: "hover:text-blue-600" %>
+          <% end %>
+        </nav>
+      </div>
+
+      <!-- モバイルメニュー -->
+      <nav class="sm:hidden px-4 pb-4 hidden flex-col space-y-2 text-gray-700" id="mobile-menu">
+        <% if logged_in? %>
+          <%= link_to 'マイページ', dashboard_path, class: "block hover:text-blue-600" %>
+          <%= link_to 'ログアウト', logout_path, method: :delete, data: { confirm: "ログアウトしますか？" }, class: "block text-red-500 hover:text-red-700" %>
+          <span class="text-sm text-gray-500"><%= current_user.name %> さん</span>
+        <% else %>
+          <%= link_to 'ログイン', login_path, class: "block hover:text-blue-600" %>
+          <%= link_to 'ユーザー登録', signup_path, class: "block hover:text-blue-600" %>
+        <% end %>
+      </nav>
+    </header>
+
+    <!-- Main -->
+    <main class="flex-grow">
+      <div class="prose prose-sm sm:prose lg:prose-lg max-w-4xl mx-auto py-8 px-4">
+        <%= yield %>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-4 mt-auto">
+      <div class="max-w-7xl mx-auto px-4 text-center text-sm">
+        &copy; <%= Time.now.year %> ダイエットアプリ All rights reserved.
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      toggleBtn.addEventListener('click', () => {
+      const isHidden = mobileMenu.classList.toggle('hidden');
+      toggleBtn.setAttribute('aria-expanded', !isHidden);
+        });
+      });
+    </script>
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(function(registration) {
+            console.log('ServiceWorker registered:', registration);
+          })
+          .catch(function(error) {
+            console.log('ServiceWorker registration failed:', error);
+          });
+      }
+</script>
+
+
+  </body>
+</html>

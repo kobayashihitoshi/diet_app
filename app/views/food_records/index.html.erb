@@ -1,0 +1,38 @@
+<div class="max-w-4xl mx-auto px-4 py-6 space-y-6">
+
+  <!-- ヘッダー -->
+  <div class="flex items-center justify-between">
+    <h2 class="text-2xl font-bold text-gray-800">🍽 食事記録一覧</h2>
+    <%= link_to "＋ 新しい記録を追加", new_food_record_path, class: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-semibold" %>
+  </div>
+
+  <!-- 食事記録テーブル -->
+  <div class="overflow-x-auto">
+    <table class="min-w-full table-auto border-collapse rounded-md shadow-md">
+      <thead>
+        <tr class="bg-gray-100 text-gray-700 text-left text-sm">
+          <th class="px-4 py-2">日付</th>
+          <th class="px-4 py-2">種類</th>
+          <th class="px-4 py-2">メニュー</th>
+          <th class="px-4 py-2">カロリー</th>
+          <th class="px-4 py-2 text-center">操作</th>
+        </tr>
+      </thead>
+      <tbody class="text-sm text-gray-800">
+        <% @food_records.each do |record| %>
+          <tr class="hover:bg-blue-50 border-b">
+            <td class="px-4 py-2"><%= record.recorded_on.strftime("%Y/%m/%d") %></td>
+            <td class="px-4 py-2"><%= record.meal_type %></td>
+            <td class="px-4 py-2"><%= record.menu %></td>
+            <td class="px-4 py-2"><%= record.calories %> kcal</td>
+            <td class="px-4 py-2 text-center space-x-2">
+              <%= link_to "編集", edit_food_record_path(record), class: "text-blue-600 hover:underline text-sm" %>
+              <%= button_to "削除", food_record_path(record), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "text-red-600 hover:underline text-sm bg-transparent border-0 p-0 inline" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+</div>

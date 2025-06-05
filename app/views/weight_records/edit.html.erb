@@ -1,0 +1,17 @@
+<h2>体重記録の更新</h2>
+
+<%= form_with model: @weight_record do |f| %>
+  <div>
+    <%= f.label :weight, "体重（kg）" %><br>
+    <%= f.number_field :weight, step: 0.1 %>
+  </div>
+
+  <div>
+    <%= f.label :recorded_on, "記録日" %><br>
+    <%= f.date_field :recorded_on, value: Date.today %>
+  </div>
+
+  <%= f.submit '更新する' %>
+<% end %>
+
+<%= link_to "一覧へ戻る", weight_records_path %>

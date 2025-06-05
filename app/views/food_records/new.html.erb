@@ -1,0 +1,53 @@
+<div class="max-w-xl mx-auto p-6 bg-white rounded-xl shadow-md space-y-6">
+
+  <h2 class="text-2xl font-bold text-blue-600 text-center">🍴 食事記録の登録</h2>
+
+  <%= form_with model: @food_record, local: true do |f| %>
+    <!-- 日付 -->
+    <div class="mb-4">
+      <%= f.label :recorded_on, '日付', class: "block text-sm font-medium text-gray-700" %>
+      <%= f.date_field :recorded_on, value: Date.today, class: "mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" %>
+    </div>
+
+    <!-- 食事の種類 -->
+    <div class="mb-4">
+      <%= f.label :meal_type, '食事の種類', class: "block text-sm font-medium text-gray-700" %>
+      <%= f.select :meal_type, FoodRecord::MEAL_TYPES, {}, class: "mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" %>
+    </div>
+
+    <!-- メニュー -->
+    <div class="mb-4">
+      <%= f.label :menu, 'メニュー', class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_field :menu, class: "mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" %>
+    </div>
+
+    <!-- カロリー -->
+    <div class="mb-6">
+      <%= f.label :calories, 'カロリー（kcal）', class: "block text-sm font-medium text-gray-700" %>
+      <%= f.number_field :calories, class: "mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" %>
+    </div>
+
+    <!-- 送信ボタン -->
+    <div class="text-center">
+      <%= f.submit '記録する', class: "bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-md" %>
+    </div>
+  <% end %>
+
+  <!-- 戻るリンク -->
+  <div class="text-center">
+    <%= link_to "一覧に戻る", food_records_path, class: "inline-block mt-4 text-blue-600 hover:underline" %>
+  </div>
+
+  <!-- エラーメッセージ -->
+  <% if @food_record.errors.any? %>
+    <div class="mt-4 bg-red-100 text-red-800 border border-red-300 rounded-md p-4">
+      <h3 class="font-bold mb-2">エラーがあります：</h3>
+      <ul class="list-disc list-inside text-sm">
+        <% @food_record.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+</div>

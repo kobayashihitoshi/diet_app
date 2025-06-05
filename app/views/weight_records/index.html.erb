@@ -1,0 +1,28 @@
+<div class="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-md mt-6">
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-2xl font-bold text-gray-800">📋 体重記録一覧</h2>
+    <%= link_to "＋ 新しい記録を追加", new_weight_record_path, class: "bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 text-sm" %>
+  </div>
+
+  <table class="w-full table-auto border border-gray-200">
+    <thead>
+      <tr class="bg-gray-100 text-gray-700 text-left">
+        <th class="p-3 border-b">記録日</th>
+        <th class="p-3 border-b">体重（kg）</th>
+        <th class="p-3 border-b">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @weight_records.each do |record| %>
+        <tr class="hover:bg-gray-50">
+          <td class="p-3 border-b"><%= record.recorded_on.strftime("%Y/%m/%d") %></td>
+          <td class="p-3 border-b"><%= record.weight %> kg</td>
+          <td class="p-3 border-b space-x-2">
+            <%= link_to "編集", edit_weight_record_path(record), class: "text-blue-600 hover:underline text-sm" %>
+            <%= link_to "削除", weight_record_path(record), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "text-red-600 hover:underline text-sm" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

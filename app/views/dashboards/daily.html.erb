@@ -1,0 +1,57 @@
+<div class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+
+  <!-- 日付タイトルとフォーム -->
+  <div class="bg-white rounded-xl shadow p-6">
+    <h2 class="text-2xl font-bold mb-4 text-blue-600">
+      📅 <%= @date.strftime("%Y年%m月%d日") %> のダッシュボード
+    </h2>
+    <%= form_with url: daily_dashboard_path, method: :get, local: true, class: "flex flex-col sm:flex-row items-center gap-4" do %>
+      <label class="text-gray-700 font-medium">日付を選択：</label>
+      <%= date_field_tag :date, @date, class: "border border-gray-300 rounded px-3 py-2" %>
+      <%= submit_tag "表示", class: "bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+    <% end %>
+  </div>
+
+  <!-- 体重記録 -->
+  <div class="bg-white rounded-xl shadow p-6">
+    <h3 class="text-xl font-semibold text-purple-600 mb-3">⚖️ 体重記録</h3>
+    <% if @weight_record.any? %>
+      <ul class="space-y-2 text-gray-700">
+        <% @weight_record.each do |wr| %>
+          <li>・<%= wr.weight %> kg</li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-gray-500">記録がありません 💤</p>
+    <% end %>
+  </div>
+
+  <!-- 食事記録 -->
+  <div class="bg-white rounded-xl shadow p-6">
+    <h3 class="text-xl font-semibold text-green-600 mb-3">🍽️ 食事記録</h3>
+    <% if @food_records.any? %>
+      <ul class="space-y-2 text-gray-700">
+        <% @food_records.each do |fr| %>
+          <li>・<%= fr.meal_type %>：<%= fr.menu %>（<%= fr.calories %> kcal）</li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-gray-500">記録がありません 🥲</p>
+    <% end %>
+  </div>
+
+  <!-- 運動記録 -->
+  <div class="bg-white rounded-xl shadow p-6">
+    <h3 class="text-xl font-semibold text-yellow-600 mb-3">🏃‍♂️ 運動記録</h3>
+    <% if @exercise_records.any? %>
+      <ul class="space-y-2 text-gray-700">
+        <% @exercise_records.each do |er| %>
+          <li>・<%= er.activity %> - <%= er.duration %> 分（<%= er.calories_burned %> kcal消費）</li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-gray-500">記録がありません 🧘‍♀️</p>
+    <% end %>
+  </div>
+
+</div>

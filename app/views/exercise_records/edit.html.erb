@@ -1,0 +1,27 @@
+<h2>運動記録の編集</h2>
+
+<%= form_with model: @exercise_record do |f| %>
+  <div>
+    <%= f.label :recorded_on, '日付' %><br>
+    <%= f.date_field :recorded_on, value: Date.today %>
+  </div>
+
+  <div>
+    <%= f.label :activity, '運動の種類（例：ウォーキング、筋トレ）' %><br>
+    <%= f.text_field :activity %>
+  </div>
+
+  <div>
+    <%= f.label :duration, '時間（分）' %><br>
+    <%= f.number_field :duration %>
+  </div>
+
+  <div>
+    <%= f.label :calories_burned, '消費カロリー（kcal）' %><br>
+    <%= f.number_field :calories_burned %>
+  </div>
+
+  <%= f.submit '更新する' %>
+<% end %>
+
+<%= link_to '一覧に戻る', exercise_records_path %>

@@ -1,0 +1,35 @@
+<div class="max-w-4xl mx-auto px-4 py-6">
+  <h2 class="text-2xl font-bold text-gray-800 mb-6">🏋️‍♂️ 運動記録一覧</h2>
+
+  <div class="mb-4">
+    <%= link_to "＋ 運動記録を追加", new_exercise_record_path, class: " bg-blue-600 hover:bg-blue-700 text-black font-semibold py-2 px-4 rounded-md" %>
+  </div>
+
+  <div class="overflow-x-auto bg-white shadow-md rounded-xl">
+    <table class="min-w-full table-auto text-left">
+      <thead>
+        <tr class="bg-gray-100 text-gray-700 font-semibold">
+          <th class="px-4 py-3 border-b">日付</th>
+          <th class="px-4 py-3 border-b">運動の種類</th>
+          <th class="px-4 py-3 border-b">時間（分）</th>
+          <th class="px-4 py-3 border-b">消費カロリー（kcal）</th>
+          <th class="px-4 py-3 border-b text-center">操作</th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-800">
+        <% @exercise_records.each do |record| %>
+          <tr class="hover:bg-gray-50 border-b">
+            <td class="px-4 py-2"><%= record.recorded_on %></td>
+            <td class="px-4 py-2"><%= record.activity %></td>
+            <td class="px-4 py-2"><%= record.duration %></td>
+            <td class="px-4 py-2"><%= record.calories_burned %></td>
+            <td class="px-4 py-2 text-center space-x-2">
+              <%= link_to "編集", edit_exercise_record_path(record), class: "text-blue-600 hover:underline text-sm" %>
+              <%= button_to "削除", exercise_record_path(record), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "text-red-600 hover:underline text-sm" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
