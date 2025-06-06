@@ -2,12 +2,26 @@ require "test_helper"
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
   test "should get new" do
-    get users_new_url
+    get signup_url  # または get new_user_url
     assert_response :success
   end
 
-  test "should get create" do
-    get users_create_url
-    assert_response :success
+  test "should create user" do
+    assert_difference('User.count', 1) do
+      post users_url, params: {
+        user: {
+          name: "Test User",
+          email: "test@example.com",
+          password: "password",
+          password_confirmation: "password",
+          current_weight: 80,
+          target_weight: 70,
+          age: 30,
+          gender: "male"
+        }
+      }
+    end
+
+    assert_redirected_to dashboard_url # 登録後のリダイレクト先に応じて修正
   end
 end
