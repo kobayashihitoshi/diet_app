@@ -1,7 +1,7 @@
 class FoodRecord < ApplicationRecord
   belongs_to :user
 
-  MEAL_TYPES = ['朝食', '昼食', '夜食', '間食']
+  MEAL_TYPES = [ "朝食", "昼食", "夜食", "間食" ]
 
   validates :recorded_on, presence: true
   validates :meal_type, presence: true, inclusion: { in: MEAL_TYPES }

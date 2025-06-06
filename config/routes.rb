@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
   get "graphs/index"
-  get 'graphs', to: 'graphs#index'
+  get "graphs", to: "graphs#index"
   resources :exercise_records
   resources :food_records
   resources :weight_records
-  get 'daily_dashboard', to: "dashboards#daily"
-  get 'dashboard', to: "dashboards#show"
-  get 'login', to: "sessions#new"
+  get "daily_dashboard", to: "dashboards#daily"
+  get "dashboard", to: "dashboards#show"
+  get "login", to: "sessions#new"
   post "login", to: "sessions#create"
   delete "logout", to: "sessions#destroy"
   root "users#new"
-  get 'signup', to: 'users#new'
-  post 'users', to: 'users#create'
+  get "signup", to: "users#new"
+  post "users", to: "users#create"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

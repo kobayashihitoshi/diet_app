@@ -1,6 +1,6 @@
 class FoodRecordsController < ApplicationController
   before_action :require_login
-  before_action :set_food_record, only: [:edit, :update, :destroy]
+  before_action :set_food_record, only: [ :edit, :update, :destroy ]
 
   def index
     @food_records = current_user.food_records.order(recorded_on: :desc, meal_type: :asc)
@@ -23,7 +23,7 @@ class FoodRecordsController < ApplicationController
 
   def update
     if food_record.update(weight_record_params)
-      redirect_to food_records_path, notice: '記録を更新しました'
+      redirect_to food_records_path, notice: "記録を更新しました"
     else
       render :edit
     end
@@ -31,8 +31,8 @@ class FoodRecordsController < ApplicationController
 
   def destroy
     food_record.destroy
-    redirect_to food_records_path, notice: '記録を削除しました'
-  end 
+    redirect_to food_records_path, notice: "記録を削除しました"
+  end
 
   private
 
@@ -43,5 +43,4 @@ class FoodRecordsController < ApplicationController
   def food_record_params
     params.require(:food_record).permit(:recorded_on, :meal_type, :menu, :calories)
   end
-  
 end
