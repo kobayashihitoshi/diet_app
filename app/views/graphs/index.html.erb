@@ -1,26 +1,70 @@
-<h2>体重の推移</h2>
+<h2 class="text-2xl font-bold mb-4 text-center">体重の推移</h2>
 
-<canvas id='weightChart '></canvas>
+<div class="bg-white p-4 rounded-xl shadow-md">
+  <canvas id="weightChart" class="w-full h-64"></canvas>
+</div>
 
 <script>
   const ctx = document.getElementById('weightChart').getContext('2d');
+
   new Chart(ctx, {
     type: 'line',
     data: {
-      labels: <%= raw @dates.to_json %>
+      labels: <%= raw @dates.to_json %>,
       datasets: [{
-        label: '体重（kg）'
-        data: <%= raw @weights.to_json %>
+        label: '体重（kg）',
+        data: <%= raw @weights.to_json %>,
         borderColor: 'rgba(75, 192, 192, 1)',
-        fill: false,
-        tension: 0.2
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+        pointRadius: 4,
+        fill: true,
+        tension: 0.3
       }]
     },
     options: {
       responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+          labels: {
+            color: '#333',
+            font: {
+              size: 14
+            }
+          }
+        },
+        tooltip: {
+          backgroundColor: '#fff',
+          titleColor: '#000',
+          bodyColor: '#000',
+          borderColor: '#ccc',
+          borderWidth: 1
+        }
+      },
       scales: {
+        x: {
+          ticks: {
+            color: '#666',
+            font: {
+              size: 12
+            }
+          },
+          grid: {
+            color: '#eee'
+          }
+        },
         y: {
-          beginAtZero: false
+          beginAtZero: false,
+          ticks: {
+            color: '#666',
+            font: {
+              size: 12
+            }
+          },
+          grid: {
+            color: '#eee'
+          }
         }
       }
     }

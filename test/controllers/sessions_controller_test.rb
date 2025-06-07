@@ -14,7 +14,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     post login_url, params: {
       session: {
         email: @user.email,
-        password: 'password'  # fixtures で設定したパスワードに合わせる
+        password: "password"  # fixtures で設定したパスワードに合わせる
       }
     }
     assert_redirected_to dashboard_url  # ログイン後にリダイレクトされる先

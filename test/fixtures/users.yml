@@ -1,19 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  email: MyString
-  password_digest: MyString
+  name: Test_User
+  email: test1@example.com
+  password_digest: <%= BCrypt::Password.create('password') %>
   current_weight: 9.99
   target_weight: 9.99
-  age: 1
-  gender: MyString
+  age: 30
+  gender: male
 
 two:
-  name: MyString
-  email: MyString
-  password_digest: MyString
+  name: Another_User
+  email: test2@example.com
+  password_digest: <%= BCrypt::Password.create('password') %>
   current_weight: 9.99
   target_weight: 9.99
-  age: 1
-  gender: MyString
+  age: 25
+  gender: female

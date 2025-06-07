@@ -17,7 +17,7 @@ class WeightRecordsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create weight record" do
-    assert_difference('WeightRecord.count', 1) do
+    assert_difference("WeightRecord.count", 1) do
       post weight_records_url, params: {
         weight_record: {
           recorded_on: Date.today,
